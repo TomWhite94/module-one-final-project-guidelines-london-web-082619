@@ -57,3 +57,14 @@ Projects need to be approved prior to launching into them, so take some time to 
 # in config/environment.rb add this line:
 ActiveRecord::Base.logger = nil
 ```
+
+
+Project spec - Football Starz: 5-a-side
+
+1. A user should be able to create a team of 5 players from a pre-made list of players, without exceeding their allocated amount of money
+2. Multiple users should be able to be stored in the same 'game state'
+3. User teams will be compared once a 'game' is run, and will output the winning player: "Player2 has won the game!"
+  - The winner is decided by comparing the total 'form' of selected players ('form' is hidden when selecting players)
+  - The total scores, and individual player scores will be output at the end of the 'game'
+4. A player can only belong to a single user; two users cannot have the same player
+5. Once the match is completed, the teams and form is reset
