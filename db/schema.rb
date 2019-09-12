@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20190909091844) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.float  "bank", default: 35.0
+    t.float  "bank", default: 30.0
   end
 
 end

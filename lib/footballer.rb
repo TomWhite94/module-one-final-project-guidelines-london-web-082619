@@ -1,3 +1,7 @@
+
+# require "tty-prompt"
+# prompt = TTY::Prompt.new
+
 class Footballer < ActiveRecord::Base
 
 belongs_to :user
@@ -8,17 +12,44 @@ belongs_to :match
 
 def self.create_footballers
 
-    Footballer.create(name: "Lionel Messi", value: (1..2).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Christiano Ronaldo", value: (1..2).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Eden Hazard", value: (1..2).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Kevin De Bruyne", value: (1..2).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Neymar Jr", value: (1..2).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Kylian Mbappe", value: (1..2).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Joao Felix", value: (1..10).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Paul Pogba", value: (1..10).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Antoine Griezmann", value: (1..10).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
-    Footballer.create(name: "Marcus Rashford", value: (1..10).to_a.sample ,form: (1..10).to_a.sample ,star_rating: (1..5).to_a.sample ,risk_factor: (1..5).to_a.sample)
+    Footballer.create(name: "Lionel Messi", value: 10, form: (9..10).to_a.sample, star_rating: 5 , risk_factor: 1 )
+    Footballer.create(name: "Christiano Ronaldo", value: 10 , form: (9..10).to_a.sample , star_rating: 5 , risk_factor: 1)
+    Footballer.create(name: "Neymar Jr", value: 10 , form: (9..10).to_a.sample , star_rating: 5 , risk_factor: 1)
 
+    Footballer.create(name: "Kylian Mbappe", value: 9 , form: (8..10).to_a.sample , star_rating: 5 , risk_factor: 2 )
+    Footballer.create(name: "Eden Hazard" , value: 9, form: (8..10).to_a.sample , star_rating: 5 , risk_factor: 2)
+    Footballer.create(name: "Sergio Aguero" , value: 9 , form: (8..10).to_a.sample , star_rating: 5 , risk_factor: 2 )
+
+    Footballer.create(name: "Kevin De Bruyne", value: 8, form: (7..9).to_a.sample, star_rating: 4 , risk_factor: 2 )
+    Footballer.create(name: "Raheem Sterling", value: 8, form: (7..9).to_a.sample, star_rating: 4 , risk_factor: 2 )
+    Footballer.create(name: "Virgil van Dijk" , value: 8, form: (7..9).to_a.sample , star_rating: 4 , risk_factor: 2 )
+    Footballer.create(name: "Luis Suarez", value: 8 , form: (7..9).to_a.sample , star_rating: 4 , risk_factor: 2 )
+
+    Footballer.create(name: "Pierre-Emerick Aubameyang", value: 7 , form: (6..9).to_a.sample, star_rating: 4 , risk_factor:3 )
+    Footballer.create(name: "Marc-Andre ter Stegen", value: 7, form: (6..9).to_a.sample, star_rating: 4 , risk_factor: 3 )
+    Footballer.create(name: "Marcelo", value: 7, form: (6..9).to_a.sample, star_rating: 4 , risk_factor: 3)
+    Footballer.create(name: "Sergio Ramos", value: 7, form: (6..9).to_a.sample, star_rating: 4 , risk_factor: 3)
+
+    Footballer.create(name: "Lucas Torreira", value: 6, form: (5..8).to_a.sample, star_rating: 3 , risk_factor: 3)
+    Footballer.create(name: "Cesar Azpilicueta", value: 6, form: (5..8).to_a.sample, star_rating: 3 , risk_factor: 3)
+    
+    Footballer.create(name: "Declan Rice", value: 5 , form: (5..8).to_a.sample, star_rating: 3 , risk_factor: 3)
+    Footballer.create(name: "Wilfried Zaha" , value: 5, form: (4..9).to_a.sample , star_rating: 3 , risk_factor: 5)
+    
+    Footballer.create(name: "Teemu Pukki", value: 4, form: (3..7).to_a.sample , star_rating: 3 , risk_factor: 4)
+    Footballer.create(name: "Ashley Barnes" , value: 4, form: (3..7).to_a.sample , star_rating: 3 , risk_factor: 4)
+    
+
+    Footballer.create(name: "Angelo Ogbonna" , value: 3 , form: (2..6).to_a.sample , star_rating: 2 , risk_factor: 4)
+    Footballer.create(name: "Ben Cantwell", value: 3, form: (2..6).to_a.sample , star_rating: 2 , risk_factor: 4 )
+    Footballer.create(name: "Joe Hart", value: 3, form: (2..6).to_a.sample, star_rating: 2 , risk_factor: 4)
+    Footballer.create(name: "Tim Krul", value: 2, form: (1..6).to_a.sample, star_rating: 2 , risk_factor: 5)
+    Footballer.create(name: "Tyrone Mings", value: 2, form: (2..6).to_a.sample , star_rating: 2 , risk_factor: 5)
+    Footballer.create(name: "Fabien Benko", value: 2, form: (2..6).to_a.sample, star_rating: 2 , risk_factor: 5)
+
+    Footballer.create(name: "Gary from accounting", value: 0 , form: (0..1).to_a.sample , star_rating: 0 , risk_factor: 1)
+    Footballer.create(name: "The Wealdstone Raider", value: 0, form: (0..1).to_a.sample, star_rating: 0, risk_factor: 1)
+    
 end
 
 def self.add_to_user(footballer_name, user_name)
@@ -68,9 +99,28 @@ def self.add_to_user(footballer_name, user_name)
     self.destroy_all
     self.create_footballers
     Match.create(name: "The Big Game!")
-    User.all.each{|u| u.bank = 35} 
+    User.all.each{|u| u.bank = 30} 
  end
-
-
-
 end
+
+
+ ####################################################################################################
+# def self.title_screen
+# font = TTY::Font.new(:doom)
+
+# box = TTY::Box.frame(
+#   width: 120,
+#   height: 15,
+#   align: :center,
+#   border: :thick,
+#   padding: 3
+# ) do
+#     font.write("Football    Starz")
+    
+    
+# end
+# puts box
+# end
+
+
+# end
