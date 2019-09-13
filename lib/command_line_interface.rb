@@ -36,6 +36,14 @@ def title_screen
 
     end
 
+    def rules
+        puts "Game Rules:".colorize(:blue)
+        puts "1. Each player has £30 to spend on a five-a-side team".colorize(:blue)
+        puts "2. You cannot choose a player that has already been picked".colorize(:blue)
+        puts "3. Spend all your money before you have a full team and you risk having Gary from accounting filling in...".colorize(:blue)
+
+    end
+
     def start 
         choice = @prompt.select("Choose an option", ["Create your team", "Exit game"])
         if choice == "Exit game"
@@ -43,7 +51,7 @@ def title_screen
         else
         name = @prompt.ask("Choose your team name")
         User.create(name: name)
-        puts "Your team has been created! Your team is called #{name} and you have £30 to spend"
+        puts "Your team has been created! Your team is called #{name} and you have £30 to spend".colorize(:blue)
         end
     end
 
@@ -54,60 +62,45 @@ def title_screen
         else
         name = @prompt.ask("Choose your team name")
         User.create(name: name)
-        puts "Your team has been created! Your team is called #{name} and you have £30 to spend"
+        puts "Your team has been created! Your team is called #{name} and you have £30 to spend".colorize(:blue)
         end
     end
-
-    # def remove_player_user1
-    #     first_user = User.all.first
-    #     player = first_user.footballers.last
-    #     player.user = nil
-    #     first_user.bank += player.value
-    #     puts "#{player.name} has been removed from your team. Your current bank is #{first_user.bank}"
-    #     first_user.save
-    #     player.save
-    # end
         
 
     def choose_team_user1
         
 
-        players = Footballer.all.map{|m| "#{m.name}, Value: #{m.value}, Rating: #{m.star_rating}, Risk: #{m.risk_factor}".colorize(:blue)}
+        players = Footballer.all.map{|m| "#{m.name}, Value: #{m.value}, Rating: #{m.star_rating}, Risk: #{m.risk_factor}"}
         
         choose = @prompt.select("Choose your players!", [players]).split(/,/)
 
-        # if @choose == "Remove previous player"
-        #     remove_player_user1
+        index = players.find_index {|player| player == choose.join(",")}
+        players[index].colorize(:blue)
+        players
         
-        # else @choose == "Exit game"
-        #     exit
-        # end
-            
         
-
-    
             choice = Footballer.find_by(name: choose[0])
             @first_user = User.all.first
 
             if choice.user != nil #ensuring the user isn't signing someone who has already been signed
-                puts "This player has already been picked, choose someone else!"
+                puts "This player has already been picked, choose someone else!".colorize(:red)
                 choose_team_user1
             elsif @first_user.bank < choice.value #ensuring the user isn't signing someone they can't afford
-                puts "You can't afford this player, choose someone else"    
+                puts "You can't afford this player, choose someone else".colorize(:red)   
                 choose_team_user1
                 
             
             else 
                 choice.user = @first_user #set the user_id of the footballer to match the user
                 @first_user.bank -= choice.value
-                puts "You have chosen #{choice.name} to your team!"
+                puts "You have added #{choice.name} to your team!".colorize(:green)
                 
             end
 
             choice.save
             @first_user.save
         
-            puts "You have £#{@first_user.bank} remaining!"
+            puts "You have £#{@first_user.bank} remaining!".colorize(:blue)
            
     end
 
@@ -128,24 +121,24 @@ def title_screen
             choice = Footballer.find_by(name: choose[0])
             @last_user = User.all.last
             if choice.user != nil #ensuring the user isn't signing someone who has already been signed
-                puts "This player has already been picked, choose someone else!"
+                puts "This player has already been picked, choose someone else!".colorize(:red)
                 choose_team_user2
             elsif @last_user.bank < choice.value #ensuring the user isn't signing someone they can't afford
-                puts "You can't afford this player, choose someone else"    
+                puts "You can't afford this player, choose someone else".colorize(:red)
                 choose_team_user2
                 
             
             else 
                 choice.user = @last_user #set the user_id of the footballer to match the user
                 @last_user.bank -= choice.value
-                puts "You have chosen #{choice.name} to your team!"
+                puts "You have added #{choice.name} to your team!".colorize(:green)
                 
             end
 
             choice.save
             @last_user.save
         
-            puts "You have £#{@last_user.bank} remaining!"
+            puts "You have £#{@last_user.bank} remaining!".colorize(:blue)
         end
 
         def team_edits1
@@ -158,7 +151,7 @@ def title_screen
                 player.user = nil
                 player.save
                 users.save
-                puts "You have £#{users.bank} left!"
+                puts "You have £#{users.bank} left!".colorize(:blue)
                 choose_team_user1
                 team_edits1
                 
@@ -178,7 +171,7 @@ def title_screen
             player.user = nil
             player.save
             users.save
-            puts "You have £#{users.bank} left!"
+            puts "You have £#{users.bank} left!".colorize(:blue)
             choose_team_user2
             team_edits2
             
@@ -213,11 +206,11 @@ end
                 
         end
         if user == @last_team
-            full_team2 = User.all.last.footballers.map{|m| m.name}
+            full_team_last = User.all.last.footballers.map{|m| m.name}
             x = 0
-            while full_team2.length > x do
-                puts "#{x + 1}. #{full_team2}"
-                i += 1
+            while full_team_last.length > x do
+                puts "#{x + 1}. #{full_team_last[x]}"
+                x += 1
             end
             back
         end
@@ -235,7 +228,15 @@ end
     def total_score_user2
         User.all.last.footballers.sum{|m| m.form}
     end
-   
+
+    def team_1
+        User.all.first.name
+        
+    end
+
+    def team_2 
+        User.all.last.name
+    end
 
     def play_game
         
@@ -245,15 +246,72 @@ end
         end
 
         if options == "Play the match"
+
+            quotes_array = ["The ball has been kicked outside the stadium... there has been a pause in the game".colorize(:red), "There is half naked chap on the field, the game has been delayed".colorize(:red), "Looks like one of the players has been injured! Oh, he just got a yellow card for diving! The play resumes".colorize(:red), "The ball has been punctured... The ref is trying to find a new one".colorize(:red), "The ref has briefly misplaced his whistle, play will resume once it is located".colorize(:red), "Mark Lawrenson is commencing his obligatory VAR-related moan".colorize(:red), "GOAL!! Oh no it's been disallowed".colorize(:red), "This game could go either way, nothing separating these two teams".colorize(:red), "Both managers are tearing their hair out on the sidelines! Very poor football".colorize(:red), "Oh dear! You really should not be missing open goals at this level of the game".colorize(:red)]
+            sleep(1)
+            puts "There's a huge roar from the crowd as the match gets underway".colorize(:green)
+            sleep(2)
+            puts quotes_array.sample
+            sleep(3)
+            puts quotes_array.sample
+            sleep(3)
+            puts "Half time".colorize(:green)
+            sleep(3)
+            puts quotes_array.sample
+            sleep(3)
+            puts quotes_array.sample
+            sleep(2)
+            puts "And there is the full time whistle!".colorize(:green)
+            sleep(2)
             if total_score_user1 > total_score_user2
-                puts "The final score is: #{@first_team} #{total_score_user1} - #{total_score_user2} #{@last_team}"
-                puts "Congratulations #{@first_team} you have won!!!"
+            
+    
+            box = TTY::Box.frame(
+                        width: 50,
+                        height: 10,
+                        align: :center,
+                        border: :thick,
+                        padding: 1
+                        ) do
+                            
+                            "The final score is: #{team_1} #{total_score_user1} - #{total_score_user2} #{team_2} Congratulations #{team_1} you have won!!!"
+                        end
+
+                        puts box
+
+    
+                # puts "The final score is: #{@first_team} #{total_score_user1} - #{total_score_user2} #{@last_team}"
+                # puts "Congratulations #{@first_team} you have won!!!"
             elsif total_score_user1 < total_score_user2
-                puts "The final score is: #{@first_team} #{total_score_user1} - #{total_score_user2} #{@last_team}"
-                puts "Congratulations #{@last_team} you have won!!!"
+                box = TTY::Box.frame(
+                        width: 50,
+                        height: 10,
+                        align: :center,
+                        border: :thick,
+                        padding: 1
+                        ) do
+                            
+                            "The final score is: #{team_1} #{total_score_user1} - #{total_score_user2} #{team_2} Congratulations #{team_2} you have won!!!"
+                        
+                        end
+
+                        puts box
+                # puts "The final score is: #{@first_team} #{total_score_user1} - #{total_score_user2} #{@last_team}"
+                # puts "Congratulations #{@last_team} you have won!!!"
             else
-                puts "The final score is: #{@first_team} #{total_score_user1} - #{total_score_user2} #{@last_team}"
-                puts "It's a draw!"
+                box = TTY::Box.frame(
+                        width: 50,
+                        height: 10,
+                        align: :center,
+                        border: :thick,
+                        padding: 1
+                        ) do
+                            
+                            "The final score is: #{team_1} #{total_score_user1} - #{total_score_user2} #{team_2} It's a draw!"
+                        
+                        end
+                # puts "The final score is: #{@first_team} #{total_score_user1} - #{total_score_user2} #{@last_team}"
+                # puts "It's a draw!"
             end
             
 
@@ -288,6 +346,7 @@ end
             User.clear_users
             Footballer.reset_game 
         title_screen
+        rules
         start
         while User.all.first.footballers.length < 5 do
         choose_team_user1

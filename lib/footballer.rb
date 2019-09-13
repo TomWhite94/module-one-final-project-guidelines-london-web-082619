@@ -47,8 +47,9 @@ def self.create_footballers
     Footballer.create(name: "Tyrone Mings", value: 2, form: (2..6).to_a.sample , star_rating: 2 , risk_factor: 5)
     Footballer.create(name: "Fabien Benko", value: 2, form: (2..6).to_a.sample, star_rating: 2 , risk_factor: 5)
 
-    Footballer.create(name: "Gary from accounting", value: 0 , form: (0..1).to_a.sample , star_rating: 0 , risk_factor: 1)
-    Footballer.create(name: "The Wealdstone Raider", value: 0, form: (0..1).to_a.sample, star_rating: 0, risk_factor: 1)
+    Footballer.create(name: "Gary from accounting", value: 0 , form: (0..1).to_a.sample , star_rating: 0 , risk_factor: 10)
+    Footballer.create(name: "The Wealdstone Raider", value: 0, form: (0..1).to_a.sample, star_rating: 0, risk_factor: 10)
+    Footballer.create(name: "Troopz from Arsenal Fan TV", value: 0, form: (0..1).to_a.sample, star_rating: 0, risk_factor: 10)
     
 end
 
